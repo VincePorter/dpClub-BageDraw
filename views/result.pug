@@ -1,0 +1,14 @@
+include _head 
+div
+	h1 #{message0}
+	h3 #{message1}
+	-if (new Date().getDay() === 4)
+		-if (prizeMoney >= 1000)
+			h2 Draw Must Go Off!!!...
+			a(href="/showWinner")
+				button.btn.btn-lg.btn-success Redraw Random Member
+		-else
+			h4 Prize money stays at $#{prizeMoney} for the next draw...
+	-else
+		h4 #{message2}
+include _footer

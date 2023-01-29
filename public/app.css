@@ -1,0 +1,28 @@
+body {
+	text-align: center;
+	background-color: rgba(255, 255, 0, 0.9);
+	color: blue;
+}
+
+body::before {
+	content: '';
+	background-image: url(./images/darlingtonpointclub.jpg);
+	opacity: 0.1;
+	background-size: cover;
+	background-repeat: no-repeat;
+	position: fixed;
+	top: -150px;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	z-index: -3;
+}
+
+button {
+	margin-top: 5px;
+	width: 300px;
+}
+
+button:hover {
+	cursor: pointer;
+}

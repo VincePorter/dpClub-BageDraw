@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+    badgedraw:
+        build: .
+        container_name: dpclub-badgedraw
+        restart: always
+        networks:
+            - enterprise
+        ports:
+            - '3110:3110'
+        environment:
+            - PORT=3110
+        command: node app.js
+
+networks:
+    enterprise:
+        name: enterprise-network

@@ -1,0 +1,30 @@
+include _head 
+h3 Draw Log
+p Key: &nbsp&nbsp&nbsp
+	span.text-white.bg-success &nbsp&nbsp Claimed &nbsp&nbsp
+	span &nbsp&nbsp&nbsp NOT Claimed
+
+.container.mb-5
+	table.table
+		tr
+			th Date 
+			th Member
+			th Name
+			th Amount 
+		each log in logs
+			-if (log.claimed === 'TRUE')
+				tr.text-white.bg-success
+					td #{log.date}
+					td #{log.number}
+					td #{log.name}
+					td $#{log.amount}
+			-else
+				tr
+					td #{log.date}
+					td #{log.number}
+					td #{log.name}
+					td $#{log.amount}
+a(href="/")
+	button.btn.btn-lg.btn-primary Home
+
+include _footer

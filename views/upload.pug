@@ -1,0 +1,10 @@
+include _head 
+    h2 "Financial Members.csv"
+    h4.mb-3 Upload to Web-Server then Import into DataBase...
+
+    form.container.w-50(action="/upload-csv" method="post" enctype="multipart/form-data") 
+        .mb-3 
+            input.form-control(type="file" name="upload-csv" accept="csv")
+        .d-grid 
+            input.btn.btn-primary(type="submit", value="Upload & Import")
+include _footer

@@ -1,0 +1,76 @@
+include _head 
+
+#member.mt-2
+	h1.mb-0: span#memNum.display-3.fw-bold 000
+	h1#memName.mt-0 Lucky Member
+
+	#displayTimer.text-danger.display-3.fw-bold
+		h4.mb-0.text-dark has &nbsp
+			span#timer.text-danger.display-6.fw-bold 4:00
+			span &nbsp minutes
+		h4.text-dark to claim &nbsp
+			span.text-danger.display-6.fw-bold $#{prizeMoney}
+
+	div
+		a(href="/winner")
+			button.btn.btn-lg.btn-success Claimed
+	div.mb-0
+		a(href="/nonwinner")
+			button.btn.btn-lg.btn-danger NOT Claimed
+            
+include _footer
+
+script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js")
+
+script. 
+	let x
+
+	function pickRandomMember() {
+		function generateNumber() {
+			let desired = #{winnerNumber};
+			let duration = 3000;
+			let output = $('#memNum');
+			let started = new Date().getTime();
+		
+
+			animationTimer = setInterval(function () {
+				if (new Date().getTime() - started > duration) {
+					clearInterval(animationTimer); // Stop the loop
+					output.text(desired); // output desired number
+				} else {
+					output.text(
+						'' +
+							Math.floor(Math.random() * 10) +
+							Math.floor(Math.random() * 10) +
+							Math.floor(Math.random() * 10)
+					);
+				}
+			}, 100); // animation speed
+		};
+		setTimeout(() => {
+			document.getElementById('memName').innerHTML = '#{winnerName}';
+			startCountdown();
+		}, 5000);
+		generateNumber();
+	};
+	
+
+	function startCountdown() {
+		clearInterval(x);
+		let countDownTime = new Date().getTime() + 1000 * 60 * 4.03; // set countdown time to 4 mins
+		x = setInterval(function () {
+			let now = new Date().getTime();
+			let distance = countDownTime - now;
+			let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+			let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+			document.getElementById('timer').innerHTML =
+				minutes + ':' + ('0' + seconds).slice(-2);
+			if (distance < 0) {
+				clearInterval(x);
+				document.getElementById('displayTimer').innerHTML = 'TIMES UP';
+
+			}
+		}, 1000); // one second interval
+	};
+
+	pickRandomMember();
